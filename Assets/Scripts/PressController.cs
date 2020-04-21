@@ -31,10 +31,17 @@ public class PressController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Collider2D col;
+
+       // if(col.gameObject.tag == "DeadZone")
+       // {
+       //     rigidbody.simulated = false;
+       //     animator.SetBool("grounded", true);
+       // }
         Fly(); 
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "DeadZone")
         {
@@ -42,12 +49,31 @@ public class PressController : MonoBehaviour
             animator.SetBool("grounded", true);
             //OnPlayerDied(); //event sent to GameManager
         }
+//        else
+//        {
+//            rigidbody.simulated = true;
+//            animator.SetBool("grounded", false);
+//        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "TriggerZone")
+        {
+            animator.SetBool("grounded", true);
+        }
+//        else
+//        {
+//            animator.SetBool("grounded", false);
+//        }
     }
 
     void Fly()
     {
         if(Input.GetButtonDown("Jump"))
         {
+            rigidbody.simulated = true;
+            animator.SetBool("grounded", false);
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, flyForce), ForceMode2D.Impulse);
         }
     }
