@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PressController : MonoBehaviour
 {
+    public Animator animator;
+
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnPlayerDied;
+
     public float pressForce = 10;
     public Vector3 startPos;
 
@@ -17,7 +22,7 @@ public class PressController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-//        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
 //        downRotation = Quaternion.Euler(0, 0, -90);
 //        forwardRotation = Quaternion.Euler(0, 0, 35);
         
@@ -31,7 +36,12 @@ public class PressController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
+        if(col.gameObject.tag == "DeadZone")
+        {
+            rigidbody.simulated = false;
+            animator.SetBool("grounded", true);
+            //OnPlayerDied(); //event sent to GameManager
+        }
     }
 
     void Fly()
