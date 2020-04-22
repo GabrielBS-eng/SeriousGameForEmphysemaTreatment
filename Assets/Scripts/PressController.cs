@@ -10,37 +10,72 @@ public class PressController : MonoBehaviour
     public delegate void PlayerDelegate();
     public static event PlayerDelegate OnPlayerDied;
 
-    public float pressForce = 10;
+    //for the movement forward
+    public float runSpeed = 5f;
+    //public float forwardMove = 0;
+
+    public float pressForce = 10f;
     public Vector3 startPos;
 
     public float flyForce = 5f;
 
     Rigidbody2D rigidbody;
-    Quaternion downRotation;
-    Quaternion forwardRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-//        downRotation = Quaternion.Euler(0, 0, -90);
-//        forwardRotation = Quaternion.Euler(0, 0, 35);
-        
+        animator.SetFloat("forwardMove", 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
+       // if(col.gameObject.tag == "DeadZone")
+       // {
+       //     rigidbody.simulated = false;
+       //     animator.SetBool("grounded", true);
+       // }
         Fly(); 
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    //for the movement forward
+    void FixedUpdate()
+    {
+        //ForwardMove(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+        ForwardMove(new Vector2(animator.GetFloat("forwardMove"), rigidbody.angularDrag*Time.fixedDeltaTime + rigidbody.velocity.y));
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "DeadZone")
         {
             rigidbody.simulated = false;
             animator.SetBool("grounded", true);
+            animator.SetFloat("forwardMove", 0f);
             //OnPlayerDied(); //event sent to GameManager
+        }
+//        else
+//        {
+//            rigidbody.simulated = true;
+//            animator.SetBool("grounded", false);
+//        }
+    }
+
+    void ForwardMove(Vector2 direction)
+    {
+        rigidbody.velocity = direction;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "TriggerZone")
+        {
+            animator.SetFloat("forwardMove", runSpeed);
+        }
+        else
+        {
+            animator.SetFloat("forwardMove",0f);
         }
     }
 
@@ -48,7 +83,9 @@ public class PressController : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, flyForce), ForceMode2D.Impulse);
+            rigidbody.simulated = true;
+            animator.SetBool("grounded", false);
+            rigidbody.AddForce(new Vector2(0f, flyForce), ForceMode2D.Impulse);
         }
     }
 }
