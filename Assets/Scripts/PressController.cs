@@ -31,11 +31,6 @@ public class PressController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-=======
-        //Collider2D col;
-
->>>>>>> 7769130025c5b9ca1b54fa285eed53054f961d2a
        // if(col.gameObject.tag == "DeadZone")
        // {
        //     rigidbody.simulated = false;
@@ -44,7 +39,6 @@ public class PressController : MonoBehaviour
         Fly(); 
     }
 
-<<<<<<< HEAD
     //for the movement forward
     void FixedUpdate()
     {
@@ -52,8 +46,6 @@ public class PressController : MonoBehaviour
         ForwardMove(new Vector2(animator.GetFloat("forwardMove"), rigidbody.angularDrag*Time.fixedDeltaTime + rigidbody.velocity.y));
     }
 
-=======
->>>>>>> 7769130025c5b9ca1b54fa285eed53054f961d2a
     void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "DeadZone")
@@ -70,33 +62,21 @@ public class PressController : MonoBehaviour
 //        }
     }
 
-<<<<<<< HEAD
     void ForwardMove(Vector2 direction)
     {
         rigidbody.velocity = direction;
     }
 
-=======
->>>>>>> 7769130025c5b9ca1b54fa285eed53054f961d2a
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "TriggerZone")
         {
-<<<<<<< HEAD
             animator.SetFloat("forwardMove", runSpeed);
         }
         else
         {
             animator.SetFloat("forwardMove",0f);
         }
-=======
-            animator.SetBool("grounded", true);
-        }
-//        else
-//        {
-//            animator.SetBool("grounded", false);
-//        }
->>>>>>> 7769130025c5b9ca1b54fa285eed53054f961d2a
     }
 
     void Fly()
@@ -105,11 +85,7 @@ public class PressController : MonoBehaviour
         {
             rigidbody.simulated = true;
             animator.SetBool("grounded", false);
-<<<<<<< HEAD
             rigidbody.AddForce(new Vector2(0f, flyForce), ForceMode2D.Impulse);
-=======
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, flyForce), ForceMode2D.Impulse);
->>>>>>> 7769130025c5b9ca1b54fa285eed53054f961d2a
         }
     }
 }

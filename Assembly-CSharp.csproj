@@ -56,6 +56,8 @@
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\CountdownText.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Parallax.cs" />
+     <Compile Include="Assets\Scripts\Parallaxer.cs" />
      <Compile Include="Assets\Scripts\PressController.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Gabriel/Documents/git/BiomedicalSeriousGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
