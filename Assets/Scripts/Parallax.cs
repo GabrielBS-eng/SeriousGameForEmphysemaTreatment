@@ -9,7 +9,7 @@ public class Parallax : MonoBehaviour
     public float parallaxEffect;
 
     // Dictates how fast the parallax when the player is moved forward
-    private float forwardParallaxCoef;
+    private float forwardParallaxCoef = 0.25f;
 
     // Start is called before the first frame update
     void Start()

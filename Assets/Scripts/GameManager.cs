@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         CountdownText.OnCountdownFinished += OnCountdownFinished;
-        PressController.OnPlayerDied += OnPlayerDied;
+        //PressController.OnPlayerDied += OnPlayerDied;
     }
 
     void OnDisable()
     {
         CountdownText.OnCountdownFinished -= OnCountdownFinished;
-        PressController.OnPlayerDied -= OnPlayerDied;
+        //PressController.OnPlayerDied -= OnPlayerDied;
     }
 
     void OnCountdownFinished()
