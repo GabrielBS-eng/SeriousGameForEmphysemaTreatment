@@ -21,7 +21,7 @@ public class PressController : MonoBehaviour
 
     public float vel;
 
-    enum gameState
+    public enum gameState
     {
         scene,
         beginning,
@@ -29,7 +29,7 @@ public class PressController : MonoBehaviour
         duringCicle
     };
 
-    gameState state;
+    public static gameState state;
     bool trig = false;
 
     // Start is called before the first frame update
@@ -39,8 +39,6 @@ public class PressController : MonoBehaviour
         animator.SetFloat("forwardMove", 0.2f);
         pressForce = 4f;
         rigidbody.gravityScale = 0;
-        //rigidbody.angularDrag = 0;
-
         state = gameState.scene;
     }
 
