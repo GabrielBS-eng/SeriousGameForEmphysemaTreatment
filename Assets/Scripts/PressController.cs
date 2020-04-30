@@ -133,7 +133,7 @@ public class PressController : MonoBehaviour
             animator.SetBool("grounded", false);
             //rigidbody.gravityScale = 0;
             //rigidbody.angularDrag = 0.05f;
-            vel = 8f;
+            vel = 11.605f/countDown;
             //rigidbody.AddForce(new Vector2(0f, 0.11f), ForceMode2D.Impulse);
         }
         else

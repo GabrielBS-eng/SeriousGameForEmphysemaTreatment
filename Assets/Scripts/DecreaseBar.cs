@@ -13,6 +13,8 @@ public class DecreaseBar : MonoBehaviour
     public GameObject timeBar;
     public GameObject backTimeBar;
 
+    public GameObject player;
+
     private Image decreaseBar;
 
     // Use this for initialization
@@ -31,21 +33,33 @@ public class DecreaseBar : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButton("Jump"))
+        if(PressController.state == PressController.gameState.duringCicle)
         {
-            if(countDown >= 0.0f)
+            timeBar.SetActive(true);
+            backTimeBar.SetActive(true);
+            if (Input.GetButton("Jump"))
             {
-                countDown -= Time.deltaTime;
-                decreaseBar.rectTransform.sizeDelta = new Vector2(countDown / countDown_aux * 175,10);
-                displayCount.text = countDown.ToString("F2");
-                timeBar.SetActive(true);
-                backTimeBar.SetActive(true);
+                if (countDown >= 0.0f)
+                {
+                    countDown -= Time.deltaTime;
+                    decreaseBar.rectTransform.sizeDelta = new Vector2(countDown / countDown_aux * 175, 10);
+                    displayCount.text = countDown.ToString("F2");
+                }
+                else
+                {
+                    countDown = countDown_aux;
+                    decreaseBar.rectTransform.sizeDelta = new Vector2(175, 10);
+                }
             }
-            else
-            {
-                countDown = countDown_aux;
-                decreaseBar.rectTransform.sizeDelta = new Vector2(175, 10);
-            }
+        }
+        else if(PressController.state == PressController.gameState.newCicle)
+        {
+            displayCount.text = "0.00";
+            decreaseBar.rectTransform.sizeDelta = new Vector2(175, 10);
+            timeBar.SetActive(false);
+            backTimeBar.SetActive(false);
+            countDown = countDown_aux;
+            displayCount.text = "";
         }
     }
 }
