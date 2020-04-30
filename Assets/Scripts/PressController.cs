@@ -11,7 +11,7 @@ public class PressController : MonoBehaviour
     //public static event PlayerDelegate OnPlayerDied;
 
     //for the movement forward
-    public float runSpeed = 5f;
+    public float runSpeed;
     //public float forwardMove = 0;
 
     public float pressForce;
@@ -20,6 +20,9 @@ public class PressController : MonoBehaviour
     new Rigidbody2D rigidbody;
 
     public float vel;
+
+    public static float countDown;
+    private float countDown_aux;
 
     public enum gameState
     {
@@ -30,11 +33,14 @@ public class PressController : MonoBehaviour
     };
 
     public static gameState state;
-    bool trig = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        countDown = float.Parse(Parameters.countDown);
+        countDown_aux = countDown;
+
+        runSpeed = 6.75f;
         rigidbody = GetComponent<Rigidbody2D>();
         animator.SetFloat("forwardMove", 0.2f);
         pressForce = 4f;
@@ -67,11 +73,6 @@ public class PressController : MonoBehaviour
                 ForwardMove(new Vector2(animator.GetFloat("forwardMove"), vel));
                 //if(Input.GetButtonDown("Jump")) transform.Translate(new Vector2(animator.GetFloat("forwardMove"), pressForce * Time.fixedDeltaTime));
                 //if(Input.GetButtonDown("Jump")) rigidbody.MovePosition(rigidbody.position + new Vector2(0, pressForce * Time.fixedDeltaTime));
-                if (trig == true)
-                {
-                    state = gameState.newCicle;
-                    trig = false;
-                }
                 break;
 
             case gameState.newCicle:
@@ -99,14 +100,13 @@ public class PressController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Quero Ver");
         if(col.gameObject.tag == "TriggerZone")
         {
+            ForwardMove(new Vector2(animator.GetFloat("forwardMove"), 4f));
             state = gameState.newCicle;
-            trig = true;
             Debug.Log("triggered");
             rigidbody.simulated = true;
-            animator.SetFloat("forwardMove", 10f);
+            animator.SetFloat("forwardMove", runSpeed);
             rigidbody.gravityScale = 1;
             rigidbody.angularDrag = 0.05f;
         }
@@ -133,7 +133,7 @@ public class PressController : MonoBehaviour
             animator.SetBool("grounded", false);
             //rigidbody.gravityScale = 0;
             //rigidbody.angularDrag = 0.05f;
-            vel = 2.5f;
+            vel = 8f;
             //rigidbody.AddForce(new Vector2(0f, 0.11f), ForceMode2D.Impulse);
         }
         else

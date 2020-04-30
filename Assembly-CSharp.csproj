@@ -55,9 +55,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\CountdownText.cs" />
+     <Compile Include="Assets\Scripts\DecreaseBar.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Parallax.cs" />
      <Compile Include="Assets\Scripts\ParallaxWater.cs" />
+     <Compile Include="Assets\Scripts\Parameters.cs" />
      <Compile Include="Assets\Scripts\PressController.cs" />
      <Compile Include="Assets\Scripts\RandomSoundBird.cs" />
      <Compile Include="Assets\Scripts\Sound.cs" />

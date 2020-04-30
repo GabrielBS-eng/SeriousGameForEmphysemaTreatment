@@ -30,6 +30,6 @@ public class RandomSoundBird : MonoBehaviour
         {
             randomSound.Stop();
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.25f);
     }
 }
