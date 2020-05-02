@@ -16,7 +16,7 @@ public class DecreaseBar : MonoBehaviour
     private Image decreaseBar;
 
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         countDown = float.Parse(Parameters.countDown);
         countDown_aux = countDown;

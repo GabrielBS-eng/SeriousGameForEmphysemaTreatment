@@ -9,17 +9,17 @@ public class Parameters : MonoBehaviour
 {
     public static string countDown;
 
-    void Start()
+    void OnEnable()
     {
-        countDown = "1";
-        var input = gameObject.GetComponent<InputField>();
-        //var se = new InputField.SubmitEvent();
-        //se.AddListener(SubmitName);
-        //input.onEndEdit = se;
+            countDown = "1";
+            var input = gameObject.GetComponent<InputField>();
+            //var se = new InputField.SubmitEvent();
+            //se.AddListener(SubmitName);
+            //input.onEndEdit = se;
 
-        //or simply use the line below,
-        input.onEndEdit.AddListener(SubmitName);  // This also works
-        //countDown = count.text.ToString();
+            //or simply use the line below,
+            input.onEndEdit.AddListener(SubmitName);  // This also works
+            //countDown = count.text.ToString();
     }
 
     private void SubmitName(string arg0)

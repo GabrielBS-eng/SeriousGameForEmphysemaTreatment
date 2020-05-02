@@ -9,10 +9,13 @@ public class CameraFollow : MonoBehaviour
 
     private float timeLeft = 1.75f;
 
+    private bool once = true;
+
     void LateUpdate()
     {
         if (PressController.state != PressController.gameState.theEnd)
         {
+            timeLeft = 1.75f;
             transform.position = target.position + offset;
         }
         else
@@ -21,6 +24,10 @@ public class CameraFollow : MonoBehaviour
             {
                 transform.position += 3f * new Vector3(0, 1, 0) * Time.deltaTime;
                 timeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                PressController.gameOver = true;
             }
         }     
     }        

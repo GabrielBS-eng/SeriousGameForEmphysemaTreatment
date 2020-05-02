@@ -5,10 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PressController : MonoBehaviour
 {
+    GameManager game;
+
     public Animator animator;
 
-    //public delegate void PlayerDelegate();
-    //public static event PlayerDelegate OnPlayerDied;
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnPlayerDied;
 
     //for the movement forward
     public float runSpeed;
@@ -32,13 +34,18 @@ public class PressController : MonoBehaviour
         beginning,
         newCicle,
         duringCicle,
-        theEnd
+        theEnd,
+        none
     };
 
     public static gameState state;
 
-    // Start is called before the first frame update
     void Start()
+    {
+        game = GameManager.Instance;
+    }
+
+    void OnEnable()
     {
         gameOver = false;
 
@@ -46,16 +53,19 @@ public class PressController : MonoBehaviour
         countDown_aux = countDown;
 
         runSpeed = 6.75f;
-        rigidbody = GetComponent<Rigidbody2D>();
         animator.SetFloat("forwardMove", 0.2f);
         pressForce = 4f;
+        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.simulated = true;
         rigidbody.gravityScale = 0;
+        rigidbody.angularDrag = 0;
         state = gameState.scene;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (game.GameOver) return;
         if (state == gameState.duringCicle) Fly();
     }
 
@@ -132,7 +142,6 @@ public class PressController : MonoBehaviour
             case ("EndGame"):
                 Debug.Log("cab");
                 state = gameState.theEnd;
-                gameOver = true;
                 break;
 
             default:

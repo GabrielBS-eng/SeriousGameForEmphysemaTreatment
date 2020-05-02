@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
 
     public GameObject player;
-    public GameObject canvas;
+    public GameObject barAndCount;
 
     public enum PageState
     {
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     //int score = 0;
     bool gameOver;
 
-    bool GameOver { get { return gameOver; } }
+    public bool GameOver { get { return gameOver; } }
 
     void Awake()
     {
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(PressController.state == PressController.gameState.theEnd)
+        if(PressController.gameOver)
         {
             OnPlayerDied();
         }
@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerDied()
     {
-        PressController.gameOver = true;
         //int savedScore = PlayerPrefs.GetInt("HighScore");
         //if (score > savedScore)
         //{
@@ -75,7 +74,7 @@ public class GameManager : MonoBehaviour
         //}
         //this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z), 3*Time.deltaTime);
         //transform.position = new Vector3(transform.position.x, transform.position.y+5f, transform.position.z);
-        //SetPageState(PageState.GameOver);
+        SetPageState(PageState.GameOver);
     }
 
     void SetPageState(PageState state)
@@ -109,9 +108,20 @@ public class GameManager : MonoBehaviour
     public void ConfirmGameOver()
     {
         //activated when replay button is hit
-        OnGameOverConfirmed(); //event
-        scoreText.text = "0";
+        //OnGameOverConfirmed(); //event
+        //scoreText.text = "0";
+        player.transform.position = new Vector3(-39f, -2.8f, 0);
+        player.SetActive(false);
+        barAndCount.SetActive(false);
+        PressController.state = PressController.gameState.scene;
+        PressController.gameOver = false;
         SetPageState(PageState.Start);
+    }
+
+    public void Quit()
+    {
+        PressController.gameOver = false;
+        Application.Quit();
     }
 
     public void StartGame()
@@ -121,7 +131,7 @@ public class GameManager : MonoBehaviour
             //activated when play button is hit
             SetPageState(PageState.Countdown);
             player.SetActive(true);
-            canvas.SetActive(true);
+            barAndCount.SetActive(true);
         }
     }
 }
