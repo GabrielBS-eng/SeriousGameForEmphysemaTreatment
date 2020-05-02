@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviour
     public GameObject countdownPage;
     public Text scoreText;
 
-    enum PageState
+    public GameObject player;
+    public GameObject canvas;
+
+    public enum PageState
     {
         None,
         Start,
@@ -24,14 +27,22 @@ public class GameManager : MonoBehaviour
         Countdown
     }
 
-    int score = 0;
-    bool gameOver = false;
+    //int score = 0;
+    bool gameOver;
 
-    public bool GameOver { get { return gameOver; } }
+    bool GameOver { get { return gameOver; } }
 
     void Awake()
     {
         Instance = this;
+    }
+
+    void Update()
+    {
+        if(PressController.state == PressController.gameState.theEnd)
+        {
+            OnPlayerDied();
+        }
     }
 
     void OnEnable()
@@ -50,19 +61,21 @@ public class GameManager : MonoBehaviour
     {
         SetPageState(PageState.None);
         OnGameStarted();
-        score = 0;
+        //score = 0;
         gameOver = false; 
     }
 
     void OnPlayerDied()
     {
-        gameOver = true;
-        int savedScore = PlayerPrefs.GetInt("HighScore");
-        if (score > savedScore)
-        {
-            PlayerPrefs.SetInt("HighScore", score);
-        }
-        SetPageState(PageState.GameOver);
+        PressController.gameOver = true;
+        //int savedScore = PlayerPrefs.GetInt("HighScore");
+        //if (score > savedScore)
+        //{
+        //    PlayerPrefs.SetInt("HighScore", score);
+        //}
+        //this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z), 3*Time.deltaTime);
+        //transform.position = new Vector3(transform.position.x, transform.position.y+5f, transform.position.z);
+        //SetPageState(PageState.GameOver);
     }
 
     void SetPageState(PageState state)
@@ -103,7 +116,12 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        //activated when play button is hit
-        SetPageState(PageState.Countdown);
+        if (float.Parse(Parameters.countDown) > 0)
+        {
+            //activated when play button is hit
+            SetPageState(PageState.Countdown);
+            player.SetActive(true);
+            canvas.SetActive(true);
+        }
     }
 }

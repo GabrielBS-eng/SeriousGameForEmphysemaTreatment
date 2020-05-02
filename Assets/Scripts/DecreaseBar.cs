@@ -13,8 +13,6 @@ public class DecreaseBar : MonoBehaviour
     public GameObject timeBar;
     public GameObject backTimeBar;
 
-    public GameObject player;
-
     private Image decreaseBar;
 
     // Use this for initialization
@@ -33,6 +31,7 @@ public class DecreaseBar : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(countDown);
         if(PressController.state == PressController.gameState.duringCicle)
         {
             timeBar.SetActive(true);

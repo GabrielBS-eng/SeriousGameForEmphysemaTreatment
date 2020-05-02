@@ -7,7 +7,7 @@ public class PressController : MonoBehaviour
 {
     public Animator animator;
 
-    public delegate void PlayerDelegate();
+    //public delegate void PlayerDelegate();
     //public static event PlayerDelegate OnPlayerDied;
 
     //for the movement forward
@@ -21,6 +21,8 @@ public class PressController : MonoBehaviour
 
     public float vel;
 
+    public static bool gameOver;
+
     public static float countDown;
     private float countDown_aux;
 
@@ -29,7 +31,8 @@ public class PressController : MonoBehaviour
         scene,
         beginning,
         newCicle,
-        duringCicle
+        duringCicle,
+        theEnd
     };
 
     public static gameState state;
@@ -37,6 +40,8 @@ public class PressController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
+
         countDown = float.Parse(Parameters.countDown);
         countDown_aux = countDown;
 
@@ -51,7 +56,7 @@ public class PressController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == gameState.duringCicle) Fly(); 
+        if (state == gameState.duringCicle) Fly();
     }
 
     //for the movement forward
@@ -78,7 +83,11 @@ public class PressController : MonoBehaviour
             case gameState.newCicle:
                 rigidbody.gravityScale = 1;
                 ForwardMove(new Vector2(animator.GetFloat("forwardMove"), rigidbody.angularDrag*Time.fixedDeltaTime + rigidbody.velocity.y));
-                if (animator.GetBool("grounded") == true) state = gameState.duringCicle;
+                if (animator.GetBool("grounded") == true && !Input.GetButton("Jump")) state = gameState.duringCicle;
+                break;
+
+            case gameState.theEnd:
+                //transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
                 break;
         }
     }
@@ -100,28 +109,35 @@ public class PressController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "TriggerZone")
+        switch(col.gameObject.tag)
         {
-            ForwardMove(new Vector2(animator.GetFloat("forwardMove"), 4f));
-            state = gameState.newCicle;
-            Debug.Log("triggered");
-            rigidbody.simulated = true;
-            animator.SetFloat("forwardMove", runSpeed);
-            rigidbody.gravityScale = 1;
-            rigidbody.angularDrag = 0.05f;
-        }
-        else if(col.gameObject.tag == "BeginningZone")
-        {
-            state = gameState.beginning;
+            case ("TriggerZone"):
+                ForwardMove(new Vector2(animator.GetFloat("forwardMove"), 4f));
+                state = gameState.newCicle;
+                rigidbody.simulated = true;
+                animator.SetFloat("forwardMove", runSpeed);
+                rigidbody.gravityScale = 1;
+                rigidbody.angularDrag = 0.05f;
+                break;
 
-            rigidbody.simulated = true;
-            animator.SetFloat("forwardMove", 10f);
-            rigidbody.gravityScale = 0.25f;
-            rigidbody.angularDrag = 0.05f;
-        }
-        else
-        {
-            animator.SetFloat("forwarMove", 0);
+            case ("BeginningZone"):
+                state = gameState.beginning;
+
+                rigidbody.simulated = true;
+                animator.SetFloat("forwardMove", 10f);
+                rigidbody.gravityScale = 0.25f;
+                rigidbody.angularDrag = 0.05f;
+                break;
+
+            case ("EndGame"):
+                Debug.Log("cab");
+                state = gameState.theEnd;
+                gameOver = true;
+                break;
+
+            default:
+                animator.SetFloat("forwardMove", 0);
+                break;
         }
     }
 
@@ -131,22 +147,11 @@ public class PressController : MonoBehaviour
         {
             rigidbody.simulated = true;
             animator.SetBool("grounded", false);
-            //rigidbody.gravityScale = 0;
-            //rigidbody.angularDrag = 0.05f;
             vel = 11.605f/countDown;
-            //rigidbody.AddForce(new Vector2(0f, 0.11f), ForceMode2D.Impulse);
         }
         else
         {
             vel = 0;
         }
-       // if(Input.GetButtonUp("Jump"))
-       // {
-       //     //rigidbody.simulated = true;
-       //     animator.SetBool("grounded", false);
-       //     vel = 0;
-       //     //rigidbody.AddForce(new Vector2(0f, flyForce), ForceMode2D.Impulse);
-       //     //rigidbody.gravityScale = 1;
-       // }
     }
 }

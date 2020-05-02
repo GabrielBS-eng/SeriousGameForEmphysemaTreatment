@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\DecreaseBar.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Parallax.cs" />
+     <Compile Include="Assets\Scripts\ParallaxStart.cs" />
      <Compile Include="Assets\Scripts\ParallaxWater.cs" />
      <Compile Include="Assets\Scripts\Parameters.cs" />
      <Compile Include="Assets\Scripts\PressController.cs" />

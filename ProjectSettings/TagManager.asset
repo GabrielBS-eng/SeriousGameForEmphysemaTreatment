@@ -7,6 +7,7 @@ TagManager:
   - DeadZone
   - TriggerZone
   - BeginningZone
+  - EndGame
   layers:
   - Default
   - TransparentFX
