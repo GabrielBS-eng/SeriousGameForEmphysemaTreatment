@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject barAndCount;
+    public GameObject sound;
 
     public enum PageState
     {
@@ -70,7 +71,8 @@ public class GameManager : MonoBehaviour
         //int savedScore = PlayerPrefs.GetInt("HighScore");
         //if (score > savedScore)
         //{
-        //    PlayerPrefs.SetInt("HighScore", score);
+        //    PlayerPrefs.SetInt("CurrentScore", PressController.countPauses);
+        //scoreText = PressController.countPauses.ToString();
         //}
         //this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z), 3*Time.deltaTime);
         //transform.position = new Vector3(transform.position.x, transform.position.y+5f, transform.position.z);
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
                 countdownPage.SetActive(false);
                 break;
             case PageState.Start:
+                sound.SetActive(false);
                 startPage.SetActive(true);
                 gameOverPage.SetActive(false);
                 countdownPage.SetActive(false);
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour
                 countdownPage.SetActive(false);
                 break;
             case PageState.Countdown:
+                sound.SetActive(true);
                 startPage.SetActive(false);
                 gameOverPage.SetActive(false);
                 countdownPage.SetActive(true);

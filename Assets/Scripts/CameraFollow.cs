@@ -9,8 +9,6 @@ public class CameraFollow : MonoBehaviour
 
     private float timeLeft = 1.75f;
 
-    private bool once = true;
-
     void LateUpdate()
     {
         if (PressController.state != PressController.gameState.theEnd)

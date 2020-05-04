@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PressController : MonoBehaviour
@@ -28,6 +29,12 @@ public class PressController : MonoBehaviour
     public static float countDown;
     private float countDown_aux;
 
+    public int countPauses;
+    private bool startCountOnce;
+    public float totalExerciseTime;
+    public Text totalExerciseTimeResult;
+    public Text totalPausesResult;
+
     public enum gameState
     {
         scene,
@@ -47,6 +54,7 @@ public class PressController : MonoBehaviour
 
     void OnEnable()
     {
+        countPauses = 0;
         gameOver = false;
 
         countDown = float.Parse(Parameters.countDown);
@@ -60,6 +68,8 @@ public class PressController : MonoBehaviour
         rigidbody.gravityScale = 0;
         rigidbody.angularDrag = 0;
         state = gameState.scene;
+
+        startCountOnce = true;
     }
 
     // Update is called once per frame
@@ -97,6 +107,8 @@ public class PressController : MonoBehaviour
                 break;
 
             case gameState.theEnd:
+                totalExerciseTimeResult.text = totalExerciseTime.ToString("F2") + " segundos";
+                totalPausesResult.text = countPauses.ToString();
                 //transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
                 break;
         }
@@ -142,6 +154,7 @@ public class PressController : MonoBehaviour
             case ("EndGame"):
                 Debug.Log("cab");
                 state = gameState.theEnd;
+                totalExerciseTime = Time.realtimeSinceStartup - totalExerciseTime;
                 break;
 
             default:
@@ -154,6 +167,11 @@ public class PressController : MonoBehaviour
     {
         if(Input.GetButton("Jump"))
         {
+            if(startCountOnce)
+            {
+                totalExerciseTime = Time.realtimeSinceStartup;
+                startCountOnce = false;
+            }
             rigidbody.simulated = true;
             animator.SetBool("grounded", false);
             vel = 11.605f/countDown;
@@ -162,5 +180,6 @@ public class PressController : MonoBehaviour
         {
             vel = 0;
         }
+        if (Input.GetButtonUp("Jump")) countPauses++;
     }
 }

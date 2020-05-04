@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Gabriel/Desktop/tewst/New Unity Project.exe
+C:/Users/Gabriel/Desktop/the/TheBird.exe
 SceneListBegin?
 Assets/Scenes/game.unity
 SceneListEnd?
@@ -18,6 +18,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.CultureInvariant
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
 697beb16d87251227b39de32e68f8fb1 Assembly-CSharp.dll:.Parallax
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:TMPro.TMP_PhoneNumberValidator
@@ -175,7 +176,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 bd3f0ca738703903e759f77536ed74fd Assembly-CSharp.dll:TMPro.Examples.TMP_FrameRateCounter
 a1ca1237bad0f30ea5ba8f4060929114 Assembly-CSharp.dll:TMPro.Examples.TMP_TextSelector_B
 697beb16d87251227b39de32e68f8fb1 Assembly-CSharp.dll:.ParallaxWater
-289c8d512393bdbf2acea4e5634dead2 Assembly-CSharp.dll:.PressController
+140074e2fb3ada1323d54c0d4477fb33 Assembly-CSharp.dll:.PressController
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 27e5341178f188b89bdc6495710b590c Assembly-CSharp.dll:TMPro.Examples.Benchmark01_UGUI
@@ -196,6 +197,6 @@ df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 0784d4fd5b93bd75440d01eb2fac4233 Assembly-CSharp.dll:TMPro.Examples.VertexShakeA
 8b1fe5dfdcf943fb3b72506b9f19335f Assembly-CSharp.dll:.EnvMapAnimator
-0cce91e3b935bc1cec7e2117363a36ce Assembly-CSharp.dll:.GameManager
+a6c63c712d740f6c3c269763c40e35a2 Assembly-CSharp.dll:.GameManager
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Parameters

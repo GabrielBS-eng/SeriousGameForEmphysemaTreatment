@@ -9,7 +9,7 @@ public class Sound : MonoBehaviour
     public AudioSource secondAudioData;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         AudioData = GetComponents<AudioSource>();
         firstAudioData = AudioData[0];
